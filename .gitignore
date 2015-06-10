@@ -49,3 +49,5 @@ target
 #Codio
 .codio
 .gitignore
+.ungitrc
+startup.sh
