@@ -1,0 +1,10 @@
+{
+    "bugtracking": true,
+    "logRESTRequests": false,
+    "authentication": false,
+    "users": {
+        "username1": "password1",
+        "username2": "password2",
+        "username3": "password3"
+    }
+}
