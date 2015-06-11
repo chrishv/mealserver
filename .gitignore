@@ -38,7 +38,7 @@ server.pid
 
 #Standard
 logs
-target
+target/
 /.idea
 /.idea_modules
 /.classpath
