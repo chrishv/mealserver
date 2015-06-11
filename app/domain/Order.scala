@@ -1,9 +1,11 @@
 package uk.co.benmulhern.mealserver.domain
 
+import org.joda.time.LocalDate
+
 case class Order(val id: Int, 
-	             val type: String, 
-	             val person_id: Int, 
-	             val vendor_id: Int, 
-	             val date: Date,
+	             val orderType: String, 
+	             val personId: Int, 
+	             val vendorId: Int, 
+	             val date: LocalDate,
 	             val note: Option[String])
 
