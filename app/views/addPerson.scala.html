@@ -1,0 +1,35 @@
+@(addPersonForm: Form[domain.Person], personList: List[domain.Person])(implicit messages: Messages)
+
+<h1>Manage persons</h1>
+
+<h2>Add new person</h2>
+
+@helper.form(action = routes.AddPersonController.submitAddPersonForm) {
+  @helper.inputText(addPersonForm("forename"))
+  @helper.inputText(addPersonForm("surname"))
+  @helper.inputText(addPersonForm("email"))
+  <button type="submit">OK</button>
+}
+
+<h2>View all persons</h2>
+
+<table>
+  <tr>
+    <th>Person id</th>
+    <th>Forename</th>
+    <th>Surname</th>
+    <th>Email address</th>
+  </tr>  
+  
+  @for(item <- personList) {
+
+    <tr>
+      <td>@item.id</td>
+      <td>@item.forename</td>
+      <td>@item.surname</td>
+      <td>@item.email</td>
+    </tr>  
+
+  } 
+
+</table>

@@ -1,4 +1,4 @@
-The Mealserver
+This is your new Play application
 =================================
 
-For bulk sandwich orders and such
+This file will be packaged with your application, when using `activator dist`.

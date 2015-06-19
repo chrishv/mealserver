@@ -1,4 +1,4 @@
-package uk.co.benmulhern.mealserver.domain
+package domain
 
 /**
  * @author Matthew

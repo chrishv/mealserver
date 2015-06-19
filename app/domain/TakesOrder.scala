@@ -1,4 +1,4 @@
-package uk.co.benmulhern.mealserver.domain
+package domain
 
 trait TakesOrder {
   def orderSandwiches (order:List[(Person,Sandwich)],totalSoFar:Double):Double = {
