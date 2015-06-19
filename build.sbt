@@ -1,4 +1,4 @@
-name := """h2test"""
+name := """mealserver"""
 
 version := "1.0-SNAPSHOT"
 
