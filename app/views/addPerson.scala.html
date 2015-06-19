@@ -4,7 +4,7 @@
 
 <h2>Add new person</h2>
 
-@helper.form(action = routes.AddPersonController.submitAddPersonForm) {
+@helper.form(action = routes.PersonController.submitAddPersonForm) {
   @helper.inputText(addPersonForm("forename"))
   @helper.inputText(addPersonForm("surname"))
   @helper.inputText(addPersonForm("email"))
@@ -19,6 +19,7 @@
     <th>Forename</th>
     <th>Surname</th>
     <th>Email address</th>
+    <th></th>
   </tr>  
   
   @for(item <- personList) {
@@ -28,6 +29,7 @@
       <td>@item.forename</td>
       <td>@item.surname</td>
       <td>@item.email</td>
+      <td><a href="/deleteperson/@item.id">Delete</a></td>
     </tr>  
 
   } 

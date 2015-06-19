@@ -55,6 +55,14 @@ object PersonDal extends SqlestDb {
     true
   }
 
+  def deletePerson(personId: Int) = {
+    database.withTransaction {
+      delete
+        .from(PersonTable)
+        .where(PersonTable.id === personId).execute
+    }    
+  }      
+
   lazy val personExtractor = extract[Person](
     id = PersonTable.id.asOption,
     forename = PersonTable.forename,

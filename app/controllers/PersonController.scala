@@ -10,7 +10,7 @@ import play.api.data.Forms._
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
 
-class AddPersonController extends Controller {
+class PersonController extends Controller {
 
   val dal = PersonDal
 
@@ -42,9 +42,17 @@ class AddPersonController extends Controller {
         val newId = PersonDal.createPerson(person)
 
         // Save `todo` to a database and redirect:
-        Redirect(routes.AddPersonController.showForm)
+        Redirect(routes.PersonController.showForm)
       }
     )
   }  
   
+  def deletePerson(personId: Int) = Action {
+
+    PersonDal.deletePerson(personId)
+
+    Redirect(routes.PersonController.showForm)
+
+  }
+
 }
