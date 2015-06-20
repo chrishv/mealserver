@@ -1,6 +1,12 @@
 package domain
 
-case class Person(val id: Option[Int], val forename: String, val surname: String, val email: String)
+case class Person(val id: Option[Int], val forename: String, val surname: String, val email: String) {
+
+  // Contructor validation
+  if (id.isDefined && id.get <=  0 || forename == "" || surname == "" || email == "")
+    throw new Exception("Invalid person details")
+
+}
 
 object Person {
 

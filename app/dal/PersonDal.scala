@@ -51,8 +51,8 @@ object PersonDal extends SqlestDb {
   }
 
   def validDbPerson(person: Person): Boolean = {
-    // todo - write all the checks
-    true
+    // Just got to check it's not already got an id
+    !person.id.isDefined
   }
 
   def deletePerson(personId: Int) = {

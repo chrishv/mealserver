@@ -10,7 +10,7 @@
   @helper.inputText(addPersonForm("forename"))
   @helper.inputText(addPersonForm("surname"))
   @helper.inputText(addPersonForm("email"))
-  <button type="submit" class="btn btn-lg btn-primary">OK</button>
+  <button type="submit" class="btn btn-lg btn-primary">Add new person</button>
 }
 
 <h2>View all persons</h2>
@@ -24,6 +24,7 @@
         <th>Surname</th>
         <th>Email address</th>
         <th></th>
+        <th></th>
       </tr>  
   
       @for(item <- personList) {
@@ -33,6 +34,7 @@
           <td>@item.forename</td>
           <td>@item.surname</td>
           <td>@item.email</td>
+          <td><a href ="#">Edit</a></td>
           <td><a href="/deleteperson/@item.id">Delete</a></td>
         </tr>  
 

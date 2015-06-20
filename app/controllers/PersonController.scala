@@ -12,18 +12,16 @@ import play.api.i18n.Messages.Implicits._
 
 class PersonController extends Controller {
 
-  val dal = PersonDal
-
   val personForm: Form[Person] = 
     Form(mapping(
-           "forename" -> text,
-           "surname"  -> text,
-           "email"    -> text
+           "forename" -> nonEmptyText,
+           "surname"  -> nonEmptyText,
+           "email"    -> nonEmptyText
          )(Person.formApply)(Person.formUnapply))
 
   def showPersons = Action {
     val personList = PersonDal.getPersons()
-    Ok(views.html.main("Add Person")(views.html.persons(personForm, personList)))
+    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, personList)))
   }
 
   def submitAddPersonForm = Action { implicit request =>
@@ -33,7 +31,7 @@ class PersonController extends Controller {
       (formContainingErrors: Form[Person]) => {
         // Show the user a completed form with error messages:
         val personList = PersonDal.getPersons()
-        BadRequest(views.html.persons(formContainingErrors, personList))
+        BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, personList)))
       },
 
       // Success function:
