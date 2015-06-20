@@ -21,9 +21,9 @@ class PersonController extends Controller {
            "email"    -> text
          )(Person.formApply)(Person.formUnapply))
 
-  def showForm = Action {
+  def showPersons = Action {
     val personList = PersonDal.getPersons()
-    Ok(views.html.main("Add Person")(views.html.addPerson(personForm, personList)))
+    Ok(views.html.main("Add Person")(views.html.persons(personForm, personList)))
   }
 
   def submitAddPersonForm = Action { implicit request =>
@@ -33,7 +33,7 @@ class PersonController extends Controller {
       (formContainingErrors: Form[Person]) => {
         // Show the user a completed form with error messages:
         val personList = PersonDal.getPersons()
-        BadRequest(views.html.addPerson(formContainingErrors, personList))
+        BadRequest(views.html.persons(formContainingErrors, personList))
       },
 
       // Success function:
@@ -42,7 +42,7 @@ class PersonController extends Controller {
         val newId = PersonDal.createPerson(person)
 
         // Save `todo` to a database and redirect:
-        Redirect(routes.PersonController.showForm)
+        Redirect(routes.PersonController.showPersons)
       }
     )
   }  
@@ -51,7 +51,7 @@ class PersonController extends Controller {
 
     PersonDal.deletePerson(personId)
 
-    Redirect(routes.PersonController.showForm)
+    Redirect(routes.PersonController.showPersons)
 
   }
 

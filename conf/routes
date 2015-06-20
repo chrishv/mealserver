@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET     /addperson                  controllers.PersonController.showForm
+GET     /persons                    controllers.PersonController.showPersons
 POST    /submitaddpersonform        controllers.PersonController.submitAddPersonForm
 GET     /deleteperson/:personId     controllers.PersonController.deletePerson(personId: Int)
 
