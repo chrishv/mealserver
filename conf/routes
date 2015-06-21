@@ -5,6 +5,7 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /persons                    controllers.PersonController.showPersons
+GET     /searchpersons              controllers.PersonController.searchPersons(f ?= "")
 POST    /submitaddpersonform        controllers.PersonController.submitAddPersonForm
 GET     /deleteperson/:personId     controllers.PersonController.deletePerson(personId: Int)
 

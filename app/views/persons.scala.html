@@ -1,4 +1,4 @@
-@(addPersonForm: Form[domain.Person], personList: List[domain.Person])(implicit messages: Messages)
+@(addPersonForm: Form[domain.Person], searchTerm:String, personList: List[domain.Person])(implicit messages: Messages)
 
 <div class="page-header">
   <h1>Manage persons</h1>
@@ -12,6 +12,16 @@
   @helper.inputText(addPersonForm("email"))
   <button type="submit" class="btn btn-lg btn-primary">Add new person</button>
 }
+
+    <div id="actions">
+        
+        @helper.form(action=routes.PersonController.searchPersons()) {
+            <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
+            <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+        }
+
+    </div>
+
 
 <h2>View all persons</h2>
 

@@ -1,0 +1,31 @@
+New log file opened at Mon Jun 15 13:13:28 BST 2015 by 10684@Alienware
+Taking next connection to: 56983
+New client attempting to connect on port: 56984-56983
+  Address = /172.28.28.249:56983
+This client on port 56984 has uuid a0d6bc7f-92ef-44be-b307-5b8571efadcc configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-a0d6bc7f-92ef-44be-b307-5b8571efadcc
+Taking next connection to: 56983
+New client attempting to connect on port: 56986-56983
+  Address = /172.28.28.249:56983
+Handshake exception on socket: 56986
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:265)
+	at java.io.DataInputStream.readInt(DataInputStream.java:387)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 56983
+New client attempting to connect on port: 56987-56983
+  Address = /172.28.28.249:56983
+This client on port 56987 has uuid 0221798a-d4ba-4162-8c12-ec5ab82aa256 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-a0d6bc7f-92ef-44be-b307-5b8571efadcc, activator-0221798a-d4ba-4162-8c12-ec5ab82aa256
+Taking next connection to: 56983

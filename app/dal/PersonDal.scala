@@ -15,11 +15,18 @@ object PersonTable extends PersonTable(None)
 
 object PersonDal extends SqlestDb {
 
-  def getPersons(searchTerm: String = ""): List[Person] = {
+  def getPersons(searchTerm: String) : List[Person] = {
   	// TODO implement searchTerm
+    if (searchTerm != "") {
+    val wildCardSearch = ("%" + searchTerm + "%")  
     select
   	  .from(PersonTable)
-  	  .extractAll(personExtractor)
+  	  .where((PersonTable.forename like wildCardSearch) || (PersonTable.forename like wildCardSearch) || (PersonTable.email like wildCardSearch))
+      .extractAll(personExtractor)}
+    else
+      select
+      .from(PersonTable)
+      .extractAll(personExtractor)    
   }
 
   def createPerson(person: Person): Int = {

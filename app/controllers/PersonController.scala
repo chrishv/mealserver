@@ -20,18 +20,25 @@ class PersonController extends Controller {
          )(Person.formApply)(Person.formUnapply))
 
   def showPersons = Action {
-    val personList = PersonDal.getPersons()
-    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, personList)))
+    val searchTerm = ""
+    val personList = PersonDal.getPersons(searchTerm)
+    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, "",personList)))
   }
 
+  def searchPersons(searchTerm: String) = Action {
+    val personList = PersonDal.getPersons(searchTerm)
+    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, searchTerm, personList)))
+  }
+  
   def submitAddPersonForm = Action { implicit request =>
     personForm.bindFromRequest().fold(
     
       // Failure function:
       (formContainingErrors: Form[Person]) => {
         // Show the user a completed form with error messages:
-        val personList = PersonDal.getPersons()
-        BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, personList)))
+        val searchTerm = ""
+        val personList = PersonDal.getPersons(searchTerm)
+        BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, searchTerm, personList)))
       },
 
       // Success function:
@@ -40,6 +47,7 @@ class PersonController extends Controller {
         val newId = PersonDal.createPerson(person)
 
         // Save `todo` to a database and redirect:
+        val searchTerm = ""
         Redirect(routes.PersonController.showPersons)
       }
     )
@@ -49,6 +57,7 @@ class PersonController extends Controller {
 
     PersonDal.deletePerson(personId)
 
+    val searchTerm = ""
     Redirect(routes.PersonController.showPersons)
 
   }
