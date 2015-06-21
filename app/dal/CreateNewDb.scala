@@ -4,10 +4,6 @@ object CreateNewDb extends SqlestDb {
 
   def generateNewDb() = {
 
-    executeRawSql("CREATE SCHEMA mealserver")
-    
-    executeRawSql("SET SCHEMA mealserver")
-
     executeRawSql("""CREATE TABLE person
                        (
                           PRIMARY KEY(person_id),

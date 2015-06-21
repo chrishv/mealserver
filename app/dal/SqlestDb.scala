@@ -12,10 +12,11 @@ trait SqlestDb {
 
   implicit val database = Database.withDataSource(dataSource, statementBuilder)
     
+  // Try to create the new DB on the first go
   try {
-    executeRawSql("SET SCHEMA mealserver")
+    CreateNewDb.generateNewDb()
   } catch {
-    case e: DataException => CreateNewDb.generateNewDb()
+    case e: Exception => // Do nothing
   }
     
   def executeRawSql(sql: String) =
