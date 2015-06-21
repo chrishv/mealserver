@@ -13,7 +13,7 @@ class PersonTable(alias: Option[String]) extends Table("person", alias) {
 
 object PersonTable extends PersonTable(None)
 
-object PersonDal extends SqlestDb {
+trait PersonDal extends SqlestDb {
 
   def getPersons(searchTerm: String) : List[Person] = {
   	// TODO implement searchTerm

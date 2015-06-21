@@ -12,6 +12,8 @@ import play.api.i18n.Messages.Implicits._
 
 class PersonController extends Controller {
 
+  val personDal = new PersonDal {}
+
   val personForm: Form[Person] = 
     Form(mapping(
            "forename" -> nonEmptyText,
@@ -23,6 +25,7 @@ class PersonController extends Controller {
     val searchTerm = ""
     val personList = PersonDal.getPersons(searchTerm)
     Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, "",personList)))
+
   }
 
   def searchPersons(searchTerm: String) = Action {
@@ -36,15 +39,17 @@ class PersonController extends Controller {
       // Failure function:
       (formContainingErrors: Form[Person]) => {
         // Show the user a completed form with error messages:
+
         val searchTerm = ""
         val personList = PersonDal.getPersons(searchTerm)
         BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, searchTerm, personList)))
+
       },
 
       // Success function:
       (person: Person) => {
  
-        val newId = PersonDal.createPerson(person)
+        val newId = personDal.createPerson(person)
 
         // Save `todo` to a database and redirect:
         val searchTerm = ""
@@ -55,7 +60,7 @@ class PersonController extends Controller {
   
   def deletePerson(personId: Int) = Action {
 
-    PersonDal.deletePerson(personId)
+    personDal.deletePerson(personId)
 
     val searchTerm = ""
     Redirect(routes.PersonController.showPersons)

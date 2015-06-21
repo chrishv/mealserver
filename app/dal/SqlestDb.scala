@@ -11,13 +11,13 @@ trait SqlestDb {
   val statementBuilder = sqlest.sql.H2StatementBuilder
 
   implicit val database = Database.withDataSource(dataSource, statementBuilder)
-
+    
   try {
     executeRawSql("SET SCHEMA mealserver")
   } catch {
     case e: DataException => CreateNewDb.generateNewDb()
   }
-
+    
   def executeRawSql(sql: String) =
     database.executeWithConnection { connection =>
       try {
