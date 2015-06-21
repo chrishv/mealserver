@@ -23,13 +23,13 @@ class PersonController extends Controller {
 
   def showPersons = Action {
     val searchTerm = ""
-    val personList = PersonDal.getPersons(searchTerm)
-    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, "",personList)))
+    val personList = personDal.getPersons(searchTerm)
+    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, "", personList)))
 
   }
 
   def searchPersons(searchTerm: String) = Action {
-    val personList = PersonDal.getPersons(searchTerm)
+    val personList = personDal.getPersons(searchTerm)
     Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, searchTerm, personList)))
   }
   
@@ -41,7 +41,7 @@ class PersonController extends Controller {
         // Show the user a completed form with error messages:
 
         val searchTerm = ""
-        val personList = PersonDal.getPersons(searchTerm)
+        val personList = personDal.getPersons(searchTerm)
         BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, searchTerm, personList)))
 
       },
@@ -50,9 +50,6 @@ class PersonController extends Controller {
       (person: Person) => {
  
         val newId = personDal.createPerson(person)
-
-        // Save `todo` to a database and redirect:
-        val searchTerm = ""
         Redirect(routes.PersonController.showPersons)
       }
     )
@@ -61,8 +58,6 @@ class PersonController extends Controller {
   def deletePerson(personId: Int) = Action {
 
     personDal.deletePerson(personId)
-
-    val searchTerm = ""
     Redirect(routes.PersonController.showPersons)
 
   }

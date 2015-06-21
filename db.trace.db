@@ -1,6 +1,0 @@
-06-20 12:52:54 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "USERS" not found; SQL statement:
-select * from users [42102-187]
-06-20 12:53:53 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "PERSONTABLE" not found; SQL statement:
-select * from PersonTable [42102-187]
