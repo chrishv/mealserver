@@ -24,13 +24,13 @@ class PersonController extends Controller {
   def showPersons = Action {
     val searchTerm = ""
     val personList = personDal.getPersons(searchTerm)
-    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, "", personList)))
+    Ok(views.html.main("MealServer - persons", "personMenuItem")(views.html.persons(personForm, "", personList)))
 
   }
 
   def searchPersons(searchTerm: String) = Action {
     val personList = personDal.getPersons(searchTerm)
-    Ok(views.html.main("MealServer - persons")(views.html.persons(personForm, searchTerm, personList)))
+    Ok(views.html.main("MealServer - persons", "personMenuItem")(views.html.persons(personForm, searchTerm, personList)))
   }
   
   def submitAddPersonForm = Action { implicit request =>
@@ -42,7 +42,7 @@ class PersonController extends Controller {
 
         val searchTerm = ""
         val personList = personDal.getPersons(searchTerm)
-        BadRequest(views.html.main("MealServer - persons")(views.html.persons(formContainingErrors, searchTerm, personList)))
+        BadRequest(views.html.main("MealServer - persons", "personMenuItem")(views.html.persons(formContainingErrors, searchTerm, personList)))
 
       },
 
