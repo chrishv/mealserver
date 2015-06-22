@@ -21,7 +21,7 @@ trait PersonDal extends SqlestDb {
     val wildCardSearch = ("%" + searchTerm + "%")  
     select
   	  .from(PersonTable)
-  	  .where((PersonTable.forename like wildCardSearch) || (PersonTable.forename like wildCardSearch) || (PersonTable.email like wildCardSearch))
+  	  .where((PersonTable.forename like wildCardSearch) || (PersonTable.surname like wildCardSearch) || (PersonTable.email like wildCardSearch))
       .extractAll(personExtractor)}
     else
       select
