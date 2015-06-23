@@ -10,3 +10,5 @@ db
 .sbtserver
 /worksheet
 .cache
+.cache-main
+.cache-tests

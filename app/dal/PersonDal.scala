@@ -31,7 +31,7 @@ trait PersonDal extends SqlestDb {
 
   def createPerson(person: Person): Int = {
 
-  	if (validDbPerson(person))
+  	if (canCreatePerson(person))
 
       database.withTransaction {
 
@@ -57,9 +57,13 @@ trait PersonDal extends SqlestDb {
 
   }
 
-  def validDbPerson(person: Person): Boolean = {
+  def canCreatePerson(person: Person): Boolean = {
     // Just got to check it's not already got an id
     !person.id.isDefined
+  }
+
+  def canUpdatePerson(person: Person): Boolean = {
+    person.id.isDefined
   }
 
   def deletePerson(personId: Int) = {
@@ -67,8 +71,24 @@ trait PersonDal extends SqlestDb {
       delete
         .from(PersonTable)
         .where(PersonTable.id === personId).execute
-    }    
+    }      
   }      
+
+  def updatePerson(person: Person) = {
+    if (canUpdatePerson(person)) {
+      val updateStatement =
+        update(PersonTable)
+          .set(
+            personExtractor.settersFor(person)
+              .filter(_.column.tableAlias == PersonTable.tableAlias))
+          .where(PersonTable.id === person.id)
+
+      database.withTransaction {
+        updateStatement.execute
+      }
+    }   
+    else throw new DataException("Can't update this person")  
+  }
 
   lazy val personExtractor = extract[Person](
     id = PersonTable.id.asOption,
