@@ -1,0 +1,56 @@
+@(addPersonForm: Form[domain.Person], searchTerm:String, personList: List[domain.Person])(implicit messages: Messages)
+
+<div class="page-header">
+  <h1>Manage persons</h1>
+</div>  
+
+<h2>Add new person</h2>
+
+<div class="row">
+  @helper.form(action = routes.PersonController.submitAddPersonForm) {
+    @helper.inputText(addPersonForm("forename"))
+    @helper.inputText(addPersonForm("surname"))
+    @helper.inputText(addPersonForm("email"))
+    <button type="submit" class="btn btn-lg btn-primary">Add new person</button>
+  }
+</div>  
+
+<h2>View all persons</h2>
+
+<div class="row">
+
+  @helper.form(action=routes.PersonController.searchPersons()) {
+    <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
+    <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+  }
+
+</div> 
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>Person id</th>
+        <th>Forename</th>
+        <th>Surname</th>
+        <th>Email address</th>
+        <th></th>
+        <th></th>
+      </tr>  
+  
+      @for(item <- personList) {
+
+        <tr>
+          <td>@item.id</td>
+          <td>@item.forename</td>
+          <td>@item.surname</td>
+          <td>@item.email</td>
+          <td><a href ="#">Edit</a></td>
+          <td><a href="/deleteperson/@item.id">Delete</a></td>
+        </tr>  
+
+      } 
+
+    </table>
+  </div>
+</div>    

@@ -1,4 +1,4 @@
-name := """MealServer"""
+name := """mealserver"""
 
 version := "1.0-SNAPSHOT"
 

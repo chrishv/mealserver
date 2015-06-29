@@ -4,6 +4,10 @@
 
 # Home page
 GET     /                           controllers.Application.index
+GET     /persons                    controllers.PersonController.showPersons
+GET     /searchpersons              controllers.PersonController.searchPersons(f ?= "")
+POST    /submitaddpersonform        controllers.PersonController.submitAddPersonForm
+GET     /deleteperson/:personId     controllers.PersonController.deletePerson(personId: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
