@@ -1,27 +1,49 @@
 @(addPersonForm: Form[domain.Person], searchTerm:String, personList: List[domain.Person])(implicit messages: Messages)
 
 <div class="page-header">
-  <h1>Manage persons</h1>
-</div>  
+  <h1>Persons</h1> 
 
-<h2>Add new person</h2>
+  <div class="row">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPersonWindow">
+      Add new person
+    </button>
 
-<div class="row">
-  @helper.form(action = routes.PersonController.submitAddPersonForm) {
-    @helper.inputText(addPersonForm("forename"))
-    @helper.inputText(addPersonForm("surname"))
-    @helper.inputText(addPersonForm("email"))
-    <button type="submit" class="btn btn-lg btn-primary">Add new person</button>
-  }
-</div>  
+    <!-- Modal -->
+    <div class="modal fade" id="addPersonWindow" tabindex="-1" role="dialog" aria-labelledby="addPersonWindow">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="addPersonWindow">Add person</h4>
+          </div>
+          @helper.form(action = routes.PersonController.submitAddPersonForm) {
+            <div class="modal-body">
+        
+              @helper.inputText(addPersonForm("forename"))
+              @helper.inputText(addPersonForm("surname"))
+              @helper.inputText(addPersonForm("email"))
+         
 
-<h2>View all persons</h2>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add new person</button>
+            </div>
+          }  
+        </div>  
+      </div>
+    </div>
+  </div>
+</div> 
 
 <div class="row">
 
   @helper.form(action=routes.PersonController.searchPersons()) {
-    <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
-    <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+    <dl>
+      <input type="text" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
+      <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+    </dl>
   }
 
 </div> 
@@ -45,7 +67,7 @@
           <td>@item.forename</td>
           <td>@item.surname</td>
           <td>@item.email</td>
-          <td><a href ="#">Edit</a></td>
+          <td><a href ="#" data-toggle="modal" data-target="#editPersonWindow">Edit</a></td>
           <td><a href="/deleteperson/@item.id">Delete</a></td>
         </tr>  
 
