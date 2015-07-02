@@ -1,0 +1,56 @@
+@(addVendorForm: Form[domain.Vendor], searchTerm:String, vendorList: List[domain.Vendor])(implicit messages: Messages)
+
+<div class="page-header">
+  <h1>Manage vendors</h1>
+</div>  
+
+<h2>Add new vendor</h2>
+
+<div class="row">
+  @helper.form(action = routes.VendorController.submitAddVendorForm) {
+    @helper.inputText(addVendorForm("name"))
+    @helper.inputText(addVendorForm("contact_tel_number"))
+    @helper.inputText(addVendorForm("contact_email"))
+    <button type="submit" class="btn btn-lg btn-primary">Add new vendor</button>
+  }
+</div>  
+
+<h2>View all vendors</h2>
+
+<div class="row">
+
+  @helper.form(action=routes.VendorController.searchVendors()) {
+    <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
+    <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+  }
+
+</div> 
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>Vendor id</th>
+        <th>name</th>
+        <th>telephone</th>
+        <th>email</th>
+        <th></th>
+        <th></th>
+      </tr>  
+  
+      @for(item <- vendorList) {
+
+        <tr>
+          <td>@item.id</td>
+          <td>@item.name</td>
+          <td>@item.contact_tel_number</td>
+          <td>@item.contact_email</td>
+          <td><a href ="#">Edit</a></td>
+          <td><a href="/deletevendor/@item.id">Delete</a></td>
+        </tr>  
+
+      } 
+
+    </table>
+  </div>
+</div>    

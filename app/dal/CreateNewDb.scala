@@ -20,6 +20,21 @@ object CreateNewDb extends SqlestDb {
                        )"""
                 )
 
+        executeRawSql("""CREATE TABLE vendor
+                       (
+                          PRIMARY KEY(vendor_id),
+      
+                          vendor_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+                          name CHAR(50) NOT NULL,
+                          contact_tel_number CHAR(50) NOT NULL,
+                          contact_email CHAR(50) NOT NULL,
+     
+                          CONSTRAINT vendor_0001 CHECK(vendor_id > 0),
+                          CONSTRAINT vendor_0002 CHECK(name <> ''),
+                          CONSTRAINT vendor_0003 CHECK((contact_tel_number <> '') OR (contact_email <> ''))
+                       )"""
+                )            
+                
   }
 
 }

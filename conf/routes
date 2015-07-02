@@ -8,6 +8,10 @@ GET     /persons                    controllers.PersonController.showPersons
 GET     /searchpersons              controllers.PersonController.searchPersons(f ?= "")
 POST    /submitaddpersonform        controllers.PersonController.submitAddPersonForm
 GET     /deleteperson/:personId     controllers.PersonController.deletePerson(personId: Int)
+GET     /vendors                    controllers.VendorController.showVendors
+GET     /searchvendors              controllers.VendorController.searchVendors(f ?= "")
+POST    /submitaddvendorform        controllers.VendorController.submitAddVendorForm
+GET     /deletevendor/:vendorId     controllers.VendorController.deleteVendor(vendorId: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
