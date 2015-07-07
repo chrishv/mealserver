@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   specs2 % Test,
-  "uk.co.jhc" %% "sqlest" % "0.6.7"
+  "uk.co.jhc" %% "sqlest" % "0.6.7",
+  "net.sf.jt400" % "jt400" % "8.5"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

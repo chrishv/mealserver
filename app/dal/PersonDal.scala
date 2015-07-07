@@ -16,7 +16,6 @@ object PersonTable extends PersonTable(None)
 trait PersonDal extends SqlestDb {
 
   def getPersons(searchTerm: String) : List[Person] = {
-  	// TODO implement searchTerm
     if (searchTerm != "") {
     val wildCardSearch = ("%" + searchTerm + "%")  
     select
