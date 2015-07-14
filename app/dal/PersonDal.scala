@@ -28,6 +28,13 @@ trait PersonDal extends SqlestDb {
       .extractAll(personExtractor)    
   }
 
+  def getPerson(id: Int): Person = {
+    select
+      .from(PersonTable)
+      .where(PersonTable.id === id)
+      .extractAll(personExtractor).head
+  }
+
   def createPerson(person: Person): Int = {
 
   	if (canCreatePerson(person))
@@ -89,7 +96,7 @@ trait PersonDal extends SqlestDb {
     else throw new DataException("Can't update this person")  
   }
 
-  lazy val personExtractor = extract[Person](
+  def personExtractor = extract[Person](
     id = PersonTable.id.asOption,
     forename = PersonTable.forename,
     surname = PersonTable.surname,

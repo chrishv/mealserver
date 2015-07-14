@@ -3,28 +3,28 @@
 <div class="page-header">
   <h1>Vendors</h1>
 
-<div class="row">
-
+  <div class="row">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPersonWindow">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addVendorWindow">
       Add new vendor
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="addPersonWindow" tabindex="-1" role="dialog" aria-labelledby="addPersonWindow">
+    <div class="modal fade" id="addVendorWindow" tabindex="-1" role="dialog" aria-labelledby="addVendorWindow">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="addPersonWindow">Add person</h4>
+            <h4 class="modal-title" id="addVendorWindow">Add vendor</h4>
           </div>
-
-          @helper.form(action = routes.VendorController.submitAddVendorForm) {
-          	
-          	 <div class="modal-body">
-                @helper.inputText(addVendorForm("name"))
-                @helper.inputText(addVendorForm("contact_tel_number"))
-                @helper.inputText(addVendorForm("contact_email"))
+          @helper.form(action = routes.VendorController.submitAddVendorForm) {         	
+          	<div class="modal-body">
+			 
+              @helper.inputText(addVendorForm("name"))
+              @helper.inputText(addVendorForm("contact_tel_number"))
+              @helper.inputText(addVendorForm("contact_email"))
+				
+				
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -40,8 +40,10 @@
 <div class="row">
 
   @helper.form(action=routes.VendorController.searchVendors()) {
-    <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
-    <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+    <dl>	
+      <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by name...">
+      <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
+    </dl>	
   }
 
 </div> 
@@ -50,10 +52,10 @@
   <div class="col-md-6">
     <table class="table table-bordered">
       <tr>
-        <th>Vendor id</th>
-        <th>name</th>
-        <th>telephone</th>
-        <th>email</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Telephone</th>
+        <th>Email address</th>
         <th></th>
         <th></th>
       </tr>  
