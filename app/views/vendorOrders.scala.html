@@ -1,0 +1,91 @@
+@(addVendorOrderForm: Form[domain.VendorOrder], searchTerm:String, vendorOrderList: List[domain.VendorOrder], vendorList: List[domain.Vendor], personList: List[domain.Person])(implicit messages: Messages)
+
+<div class="page-header">
+  <h1>Orders</h1>
+
+  <div class="row">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addVendorOrderWindow">
+      Add new vendor order
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addVendorOrderWindow" tabindex="-1" role="dialog" aria-labelledby="addVendorOrderWindow">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="addVendorOrderWindow">Add vendor order</h4>
+          </div>
+          @helper.form(action = routes.VendorOrderController.submitAddVendorOrderForm) {         	
+          	<div class="modal-body">
+
+              @helper.select(
+                field = addVendorOrderForm("vendor_id"),
+                vendorList.map{ v =>
+                  v.id.getOrElse(0).toString -> v.name
+                })
+
+              @helper.inputText(addVendorOrderForm("order_date"))
+
+              @helper.select(
+                field = addVendorOrderForm("owning_person"),
+                personList.map{ v =>
+                  v.id.getOrElse(0).toString -> (v.forename + " " + v.surname)
+                })
+				
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add new vendor order</button>
+            </div>
+          }  
+        </div>  
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="row">
+
+  @helper.form(action=routes.VendorOrderController.searchVendorOrders()) {
+    <dl>	
+      <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by vendor name..">
+      <input type="submit" id="searchsubmit" value="Filter by vendor name" class="btn btn-primary">
+    </dl>	
+  }
+
+</div> 
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Vendor Name</th>
+        <th>Order Date</th>
+        <th>Owning Person</th>
+     	<th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>  
+  
+      @for(item <- vendorOrderList) {
+
+        <tr>
+          <td>@item.id</td>
+          <td>@item.vendor.name</td>
+          <td style="width:100px">@item.order_date</td>
+          <td>@item.owning_person.forename @item.owning_person.surname</td>
+      	  <td>@item.status</td>
+          <td><a href ="#">Edit</a></td>
+          <td><a href="/deletevendororder/@item.id">Delete</a></td>
+          <td><b><a href="#">Orders</a></b></td>
+        </tr>  
+
+      } 
+
+    </table>
+  </div>
+</div>    

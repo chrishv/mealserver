@@ -15,17 +15,25 @@ object VendorTable extends VendorTable(None)
 
 trait VendorDal extends SqlestDb {
 
-  def getVendors(searchTerm: String) : List[Vendor] = {
+  def getVendors(searchTerm: String): List[Vendor] = {
     if (searchTerm != "") {
-    val wildCardSearch = ("%" + searchTerm + "%")  
-    select
-  	  .from(VendorTable)
-  	  .where(VendorTable.name like wildCardSearch)
-      .extractAll(vendorExtractor)}
+      val wildCardSearch = ("%" + searchTerm + "%")
+      select
+        .from(VendorTable)
+        .where(VendorTable.name like wildCardSearch)
+        .extractAll(vendorExtractor)
+    }
     else
       select
+        .from(VendorTable)
+        .extractAll(vendorExtractor)
+  }
+
+  def getVendor(id: Int): Vendor = {
+    select
       .from(VendorTable)
-      .extractAll(vendorExtractor)    
+      .where(VendorTable.id === id)
+      .extractAll(vendorExtractor).head
   }
 
   def createVendor(vendor: Vendor): Int = {
@@ -80,7 +88,7 @@ trait VendorDal extends SqlestDb {
           .set(
             vendorExtractor.settersFor(vendor)
               .filter(_.column.tableAlias == VendorTable.tableAlias))
-          .where(VendorTable.id === vendor.id)
+          .where(VendorTable.id === vendor.id.getOrElse(0))
 
       database.withTransaction {
         updateStatement.execute
@@ -89,7 +97,7 @@ trait VendorDal extends SqlestDb {
     else throw new DataException("Can't update this vendor")  
   }
 
-  lazy val vendorExtractor = extract[Vendor](
+  def vendorExtractor = extract[Vendor](
     id = VendorTable.id.asOption,
     name = VendorTable.name,
     contact_tel_number = VendorTable.contact_tel_number,

@@ -21,3 +21,6 @@ resolvers += "Sonatype OSS Releases"  at "http://oss.sonatype.org/content/reposi
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
+
+//Run in primary thread - allows for remote debugging
+fork in run := false
