@@ -6,6 +6,10 @@ Bundle-Version: 1.0.0.qualifier
 Export-Package: app,
  app.controllers,
  app.dal,
+<<<<<<< HEAD
+=======
+ app.ddl,
+>>>>>>> 0781b716d76d0156d333574e6049b5eb4715a5f7
  app.domain,
  app.views,
  conf,

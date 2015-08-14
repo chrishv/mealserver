@@ -13,7 +13,7 @@ import play.api.i18n.Messages.Implicits._
 class PersonController extends Controller {
 
   val personDal = new PersonDal {}
-
+ 
   val personForm: Form[Person] = 
     Form(mapping(
            "forename" -> nonEmptyText,
