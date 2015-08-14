@@ -16,6 +16,10 @@ GET     /vendororders                	  controllers.VendorOrderController.showVe
 GET     /searchvendororders         	  controllers.VendorOrderController.searchVendorOrders(f ?= "")
 POST    /submitaddvendororderform   	  controllers.VendorOrderController.submitAddVendorOrderForm
 GET     /deletevendororder/:vendorOrderId controllers.VendorOrderController.deleteVendorOrder(vendorOrderId: Int)
+GET     /personorders                	  controllers.PersonOrderController.showPersonOrders
+GET     /searchpersonorders         	  controllers.PersonOrderController.searchPersonOrders(f ?= "")
+POST    /submitaddpersonorderform   	  controllers.PersonOrderController.submitAddPersonOrderForm
+GET     /deletepersonorder/:personOrderId controllers.PersonOrderController.deletePersonOrder(personOrderId: Int)
 
 
 # Map static resources from the /public folder to the /assets URL path

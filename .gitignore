@@ -12,3 +12,4 @@ db
 .cache
 .cache-main
 .cache-tests
+/bin/

@@ -1,0 +1,85 @@
+@(addPersonOrderForm: Form[domain.PersonOrder], searchTerm:String, personOrderList: List[domain.PersonOrder], vendorList: List[domain.Vendor], personList: List[domain.Person])(implicit messages: Messages)
+
+<div class="page-header">
+  <h1>Orders</h1>
+
+  <div class="row">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addPersonOrderWindow">
+      Add new person order
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPersonOrderWindow" tabindex="-1" role="dialog" aria-labelledby="addPersonOrderWindow">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="addPersonOrderWindow">Add person order</h4>
+          </div>
+          @helper.form(action = routes.PersonOrderController.submitAddPersonOrderForm) {         	
+          	<div class="modal-body">
+
+              @helper.inputText(addPersonOrderForm("order_date"))
+
+              @helper.select(
+                field = addPersonOrderForm("owning_person"),
+                personList.map{ v =>
+                  v.id.getOrElse(0).toString -> (v.forename + " " + v.surname)
+                })
+				
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add new person order</button>
+            </div>
+          }  
+        </div>  
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div class="row">
+
+  @helper.form(action=routes.PersonOrderController.searchPersonOrders()) {
+    <dl>	
+      <input type="search" id="searchbox" name="f" value="@searchTerm" placeholder="Filter by person name..">
+      <input type="submit" id="searchsubmit" value="Filter by person name" class="btn btn-primary">
+    </dl>	
+  }
+
+</div> 
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Vendor</th>
+        <th>Owning Person</th>
+     	<th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>  
+  
+      @for(item <- personOrderList) {
+
+        <tr>
+          <td>@item.id</td>
+          <td style="width:100px">@item.order_date</td>
+          <td>@item.owning_person.forename @item.owning_person.surname</td>
+          <td>@item.vendor.name</td>
+      	  <td>@item.status</td>
+          <td><a href ="#">Edit</a></td>
+          <td><a href="/deletepersonorder/@item.id">Delete</a></td>
+          <td><b><a href="#">Orders</a></b></td>
+        </tr>  
+
+      } 
+
+    </table>
+  </div>
+</div>    

@@ -1,5 +1,5 @@
 package dal
-
+ 
 object CreateNewDb extends SqlestDb {
 
   def generateNewDb() = {
@@ -49,6 +49,25 @@ object CreateNewDb extends SqlestDb {
 						  CONSTRAINT vendor_order_fk_vendor_0001 FOREIGN KEY (vendor_id) REFERENCES vendor( 
 							vendor_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 						  CONSTRAINT vendor_order_fk_person_0001 FOREIGN KEY (owning_person) REFERENCES person( 
+							person_id) ON DELETE RESTRICT ON UPDATE RESTRICT	
+						  -- TODO - Check constaints on status	
+						)"""
+				)
+				
+		executeRawSql("""CREATE TABLE person_order
+                       (
+                          PRIMARY KEY(person_order_id),
+
+                          person_order_id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+                          order_date DATE NOT NULL,
+						              owning_person INT NOT NULL,
+                          vendor_id INT NOT NULL,
+                          status CHAR(12) NOT NULL,
+						  
+						  CONSTRAINT person_order_0001 CHECK(person_order_id > 0),
+						  CONSTRAINT person_order_fk_vendor_0001 FOREIGN KEY (vendor_id) REFERENCES vendor( 
+							vendor_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+						  CONSTRAINT person_order_fk_person_0001 FOREIGN KEY (owning_person) REFERENCES person( 
 							person_id) ON DELETE RESTRICT ON UPDATE RESTRICT	
 						  -- TODO - Check constaints on status	
 						)"""

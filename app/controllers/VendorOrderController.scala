@@ -43,7 +43,7 @@ class VendorOrderController extends Controller {
     val personList = personDal.getPersons("")
     Ok(views.html.main("MealServer - orders", "vendorOrderMenuItem")(views.html.vendorOrders(vendorOrderForm, searchTerm, vendorOrderList, vendorList, personList)))
   }
-  
+   
   def submitAddVendorOrderForm = Action { implicit request =>
     vendorOrderForm.bindFromRequest().fold(
     

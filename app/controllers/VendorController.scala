@@ -25,7 +25,7 @@ class VendorController extends Controller {
     val searchTerm = ""
     val vendorList = vendorDal.getVendors(searchTerm)
     Ok(views.html.main("MealServer - vendors", "vendorMenuItem")(views.html.vendors(vendorForm, "", vendorList)))
-
+ 
   }
 
   def searchVendors(searchTerm: String) = Action {
